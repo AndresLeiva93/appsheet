@@ -1,14 +1,16 @@
-# app.py (Para alojar el modelo)
 from flask import Flask, request, jsonify
+from flask_cors import CORS # 1. Importar la extensión CORS
 from predict_script import predict_image # Importar la función predict_image del paso 1
 import io
 
 app = Flask(__name__)
+CORS(app) # 2. Habilitar CORS para permitir peticiones desde el frontend (React)
 
 @app.route('/classify', methods=['POST'])
 def classify_image():
     # 1. Verificar si se subió un archivo
     if 'file' not in request.files:
+        # Añadido encabezado CORS por defecto de Flask.
         return jsonify({"error": "No se encontró el archivo de imagen"}), 400
     
     file = request.files['file']
