@@ -2,4 +2,5 @@ Flask
 torch
 torchvision
 Pillow
+flask_cors
 gunicorn
